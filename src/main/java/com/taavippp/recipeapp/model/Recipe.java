@@ -1,8 +1,9 @@
 package com.taavippp.recipeapp.model;
 
-import com.taavippp.recipeapp.util.IngredientConverter;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Entity @Table(name = "recipes")
 @Getter
@@ -16,7 +17,8 @@ public class Recipe {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "ingredient", nullable = false)
-    @Convert(converter = IngredientConverter.class)
-    private Ingredient ingredient;
+    // broken
+    @Column(name = "ingredients", nullable = false)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private Set<Ingredient> ingredients;
 }
