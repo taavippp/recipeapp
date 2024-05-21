@@ -1,5 +1,6 @@
 package com.taavippp.recipeapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import lombok.*;
 @Builder @NoArgsConstructor @AllArgsConstructor
 public class Ingredient {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
@@ -21,8 +23,8 @@ public class Ingredient {
     @Column(name = "name", nullable = false)
     private String name;
 
-    // broken
-    @JoinColumn(name = "recipe_id", nullable = false, updatable = false)
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @Setter
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     private Recipe recipe;
 }

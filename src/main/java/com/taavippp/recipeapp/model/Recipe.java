@@ -1,5 +1,6 @@
 package com.taavippp.recipeapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 @Builder @NoArgsConstructor @AllArgsConstructor
 public class Recipe {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
@@ -17,8 +19,9 @@ public class Recipe {
     @Column(name = "name", nullable = false)
     private String name;
 
-    // broken
-    @Column(name = "ingredients", nullable = false)
+    @Column(name = "instruction", nullable = false)
+    private String instruction;
+
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private Set<Ingredient> ingredients;
 }

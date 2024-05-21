@@ -35,12 +35,14 @@ public class RecipeService {
         Recipe recipe = Recipe
                 .builder()
                 .name(name)
+                .instruction("Mix and bake for a very long time")
                 .ingredients(
                         Set.of(i1, i2)
                 )
                 .build();
-        // i1.setRecipe(recipe);
-        // i2.setRecipe(recipe);
+
+        i1.setRecipe(recipe);
+        i2.setRecipe(recipe);
         recipeRepository.saveAndFlush(recipe);
     }
 
