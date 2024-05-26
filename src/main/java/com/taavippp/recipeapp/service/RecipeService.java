@@ -19,30 +19,11 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
     private static Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
-    public void create(String name) {
-        Ingredient i1 = Ingredient
-                .builder()
-                .amount(40)
-                .unit(MeasurementUnit.GALLON)
-                .name("milk")
-                .build();
-        Ingredient i2 = Ingredient
-                .builder()
-                .amount(921)
-                .unit(MeasurementUnit.GRAM)
-                .name("flour")
-                .build();
-        Recipe recipe = Recipe
-                .builder()
-                .name(name)
-                .instruction("Mix and bake for a very long time")
-                .ingredients(
-                        Set.of(i1, i2)
-                )
-                .build();
-
-        i1.setRecipe(recipe);
-        i2.setRecipe(recipe);
+    public void create(Recipe recipe) {
+        // This sets up the DB relationship between the recipe and its ingredients
+        for (Ingredient i : recipe.getIngredients()) {
+            i.setRecipe(recipe);
+        }
         recipeRepository.saveAndFlush(recipe);
     }
 

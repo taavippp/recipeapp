@@ -23,9 +23,9 @@ public class RecipeController {
 
     @PostMapping
     public ResponseEntity<String> createRecipe(
-            @RequestParam String name
+            @RequestBody Recipe recipe
     ) {
-        recipeService.create(name);
+        recipeService.create(recipe);
         return new ResponseEntity<>("Recipe created", HttpStatus.OK);
     }
 }
